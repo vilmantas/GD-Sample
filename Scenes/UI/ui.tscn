@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlc71csvie0yc"]
+
+[ext_resource type="Script" path="res://Scenes/UI/UI.cs" id="1_mgy76"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_31pxt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_el2cn"]
+bg_color = Color(0.670588, 0.101961, 0.0705882, 1)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mgy76")
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_31pxt")
+layout_mode = 2
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 280.0
+offset_bottom = 56.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_el2cn")
+max_value = 0.0
+step = 1.0
+show_percentage = false
+
+[node name="PlayerHealthLabel" type="Label" parent="PlayerHealthBar"]
+layout_mode = 2
+offset_left = 110.0
+offset_top = 9.0
+offset_right = 150.0
+offset_bottom = 35.0
+text = "0/0"

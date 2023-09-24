@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0elu4wcdgtrg"]
+[gd_scene load_steps=6 format=3 uid="uid://b0elu4wcdgtrg"]
 
 [ext_resource type="PackedScene" uid="uid://cd6ex76r6rxap" path="res://Scenes/Player/player.tscn" id="1_oky04"]
 [ext_resource type="PackedScene" uid="uid://dhbqrykfb88md" path="res://Scenes/Hurdle/hurdle.tscn" id="2_1hdar"]
+[ext_resource type="PackedScene" uid="uid://dlc71csvie0yc" path="res://Scenes/UI/ui.tscn" id="3_evy40"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2atr"]
 size = Vector3(1, 1, 24.5899)
@@ -34,3 +35,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30622, 0.965118, 0)
 
 [node name="Hurdle2" parent="Hurdles" instance=ExtResource("2_1hdar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8223, 2.62632, 0)
+
+[node name="UI" parent="." instance=ExtResource("3_evy40")]
