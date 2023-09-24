@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm0c67co6lofy"]
+[gd_scene load_steps=3 format=3 uid="uid://dm0c67co6lofy"]
 
 [ext_resource type="PackedScene" uid="uid://cp43oil1dv6tg" path="res://Models/player_test_animations.tscn" id="1_i517f"]
+[ext_resource type="Script" path="res://Features/GameManager/GameManager.cs" id="2_p2f44"]
 
 [node name="animation_testing" type="Node3D"]
 
@@ -12,3 +13,6 @@ transform = Transform3D(-0.924618, -0.12397, 0.360157, 0.00469518, 0.941771, 0.3
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.485252, 0, 0.874374, 0, 1, 0, -0.874374, 0, -0.485252, 1.49911, 3.21038, -2.97059)
 shadow_enabled = true
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_p2f44")
