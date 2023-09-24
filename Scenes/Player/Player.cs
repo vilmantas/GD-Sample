@@ -4,10 +4,14 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	// Variables
-	public const float Speed = 5.0f;
-	public const float JumpVelocity = 5f;
+	private const float Speed = 5.0f;
+	private const float JumpVelocity = 5f;
 	private int _maxHealth = 3;
 	private int _health = 3;
+	public int Health => _health;
+	public int MaxHeath => _maxHealth;
+
+	private bool _isCrouching = false;
 	
 	// Nodes
 	private CollisionShape3D _playerCollider;
@@ -17,6 +21,9 @@ public partial class Player : CharacterBody3D
 	
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
+
+	[Signal]
+	public delegate void OnHealthChangeEventHandler(int health, int maxHealth);
 	
 	
 
@@ -27,7 +34,6 @@ public partial class Player : CharacterBody3D
 	{
 		this._playerCollider = GetNode<CollisionShape3D>("PlayerCollider");
 		this._playerMesh = GetNode<MeshInstance3D>("PlayerMesh");
-		this.PrintHealth();
 		base._Ready();
 	}
 
@@ -39,28 +45,26 @@ public partial class Player : CharacterBody3D
 		if (!IsOnFloor())
 			velocity.Y -= _gravity * (float)delta;
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
-			velocity.Y = JumpVelocity;
-		
 		// Handle Crouch.
 		if (Input.IsActionJustPressed("crouch"))
 		{
+			this._isCrouching = true;
 			Vector3 crouchingScale = new Vector3(1f, 0.5f, 1f);
-			this._playerMesh.Scale = crouchingScale;
-			this._playerCollider.Scale = crouchingScale;
+			this.Scale = crouchingScale;
 		}
 
 		if (Input.IsActionJustReleased("crouch"))
 		{
+			this._isCrouching = false;
 			Vector3 nonCrouchingScale = new Vector3(1f, 1f, 1f);
-			this._playerMesh.Scale = nonCrouchingScale;
-			this._playerCollider.Scale = nonCrouchingScale;
+			this.Scale = nonCrouchingScale;
 		}
 		
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
+		// Handle Jump.
+		if (!_isCrouching && Input.IsActionJustPressed("jump") && IsOnFloor())
+			velocity.Y = JumpVelocity;
+		
+		// Handle Movement
 		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, 0)).Normalized();
 		if (direction != Vector3.Zero)
@@ -90,7 +94,7 @@ public partial class Player : CharacterBody3D
 		{
 			this._health = newHealth;
 		}
-		this.PrintHealth();
+		this.OnPlayerHealthChange();
 	}
 	
 	public void HealPlayer(int healAmount)
@@ -105,11 +109,14 @@ public partial class Player : CharacterBody3D
 		{
 			this._health = newHealth;
 		}
-		this.PrintHealth();
+		this.OnPlayerHealthChange();
+		
 	}
 
-	private void PrintHealth()
+	private void OnPlayerHealthChange()
 	{
-		GD.Print("Remaining health: " + this._health);
+		EmitSignal(SignalName.OnHealthChange, this._health, this._maxHealth);
+		GD.Print("Current health: " + this._health + "/" + this._maxHealth);
 	}
+	
 }
