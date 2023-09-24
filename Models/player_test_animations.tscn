@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp43oil1dv6tg"]
+[gd_scene load_steps=9 format=3 uid="uid://cp43oil1dv6tg"]
 
 [ext_resource type="PackedScene" uid="uid://cbki1f4nccpbg" path="res://_Imports/player_test_animations.fbx" id="1_xxg77"]
 [ext_resource type="Script" path="res://Features/PlayerAnimator/PlayerAnimator.cs" id="2_lrpip"]
 [ext_resource type="Script" path="res://Features/PlayerAnimator/PlayerAnimationManager.cs" id="2_wmaj3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jksbs"]
+animation = &"Player_Run"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mdq0w"]
 animation = &"Player_Idle"
@@ -15,47 +18,52 @@ input_0/reset = true
 input_1/name = "Idle"
 input_1/auto_advance = false
 input_1/reset = true
+input_2/name = "Running"
+input_2/auto_advance = false
+input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i84v0"]
 animation = &"Player_Walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q6byc"]
-graph_offset = Vector2(-728.543, 46.2072)
+graph_offset = Vector2(-442, 74)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_jksbs")
+nodes/Animation/position = Vector2(-100, 380)
 nodes/IdelAnim/node = SubResource("AnimationNodeAnimation_mdq0w")
-nodes/IdelAnim/position = Vector2(-100, 220)
+nodes/IdelAnim/position = Vector2(-100, 260)
 nodes/Transition/node = SubResource("AnimationNodeTransition_ddxmu")
-nodes/Transition/position = Vector2(260, 100)
+nodes/Transition/position = Vector2(260, 200)
 nodes/WalkAnim/node = SubResource("AnimationNodeAnimation_i84v0")
-nodes/WalkAnim/position = Vector2(-100, 80)
-nodes/output/position = Vector2(520, 200)
-node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"WalkAnim", &"Transition", 1, &"IdelAnim"]
+nodes/WalkAnim/position = Vector2(-100, 140)
+nodes/output/position = Vector2(680, 200)
+node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"WalkAnim", &"Transition", 1, &"IdelAnim", &"Transition", 2, &"Animation"]
 
 [node name="player_test_animations" instance=ExtResource("1_xxg77")]
 script = ExtResource("2_wmaj3")
 
 [node name="Skeleton3D" parent="RootNode/armature_humanoid_v5" index="0"]
 bones/1/position = Vector3(1.68754e-16, -0.000220218, -1.0015e-05)
-bones/1/rotation = Quaternion(-7.38521e-09, -0.0130919, -0.000595391, 0.999914)
-bones/2/rotation = Quaternion(0.0413331, 3.91399e-06, -0.000327824, 0.999145)
-bones/4/rotation = Quaternion(0.0386486, 0.000475056, -0.000545613, 0.999253)
-bones/6/rotation = Quaternion(0.00797914, -0.0207226, -0.840584, 0.541226)
-bones/7/rotation = Quaternion(0.0102419, 0.0135912, -0.411539, 0.911233)
-bones/8/rotation = Quaternion(0.125519, -0.00892612, -0.200028, 0.971676)
-bones/11/rotation = Quaternion(-0.0422859, -0.0388036, 0.842154, 0.536174)
-bones/12/rotation = Quaternion(0.00467572, -0.0197197, 0.420163, 0.907222)
-bones/13/rotation = Quaternion(0.148898, 0.0126681, 0.190119, 0.970321)
+bones/1/rotation = Quaternion(-7.51255e-09, -0.0167387, -0.000761239, 0.99986)
+bones/2/rotation = Quaternion(0.0420447, 4.26899e-06, -0.00035762, 0.999116)
+bones/4/rotation = Quaternion(0.0423979, 0.000473006, -0.000547391, 0.999101)
+bones/6/rotation = Quaternion(0.0104519, -0.0236869, -0.83995, 0.542046)
+bones/7/rotation = Quaternion(0.00856028, 0.0148655, -0.410259, 0.911808)
+bones/8/rotation = Quaternion(0.0912483, -0.00697718, -0.188579, 0.977785)
+bones/11/rotation = Quaternion(-0.0445463, -0.0415297, 0.84218, 0.535745)
+bones/12/rotation = Quaternion(0.00246571, -0.0215759, 0.419715, 0.907396)
+bones/13/rotation = Quaternion(0.185542, 0.0159196, 0.193461, 0.963273)
 bones/17/position = Vector3(0.00100544, 7.80113e-05, 3.54812e-06)
-bones/17/rotation = Quaternion(0.124495, 0.0808982, 0.988609, -0.0246674)
-bones/18/rotation = Quaternion(-0.254938, 2.96853e-08, 3.48075e-09, 0.966957)
-bones/19/rotation = Quaternion(0.784603, 0.0138636, -0.0115015, 0.619736)
+bones/17/rotation = Quaternion(0.133131, 0.0844472, 0.987094, -0.0280987)
+bones/18/rotation = Quaternion(-0.264324, 2.96501e-08, 3.76912e-09, 0.964434)
+bones/19/rotation = Quaternion(0.787963, 0.0216533, -0.0195111, 0.615032)
 bones/21/position = Vector3(-0.00100544, 7.20669e-05, 3.27801e-06)
-bones/21/rotation = Quaternion(-0.0913263, 0.0961365, 0.990944, 0.0211381)
-bones/22/rotation = Quaternion(-0.258937, 2.96707e-08, 3.60357e-09, 0.965894)
-bones/23/rotation = Quaternion(0.777244, -0.0348271, 0.028486, 0.627589)
+bones/21/rotation = Quaternion(-0.0913583, 0.103174, 0.990252, 0.0202284)
+bones/22/rotation = Quaternion(-0.268084, 2.96352e-08, 3.88474e-09, 0.963396)
+bones/23/rotation = Quaternion(0.778023, -0.0441529, 0.0376994, 0.625547)
 bones/26/position = Vector3(0.00145694, -0.00381733, 0.00216085)
-bones/27/rotation = Quaternion(-0.687971, 0.0663183, 0.0694622, 0.719356)
+bones/27/rotation = Quaternion(-0.688289, 0.0625721, 0.0655321, 0.719756)
 bones/28/position = Vector3(-0.00145583, -0.00381733, 0.00216085)
-bones/29/rotation = Quaternion(-0.689663, -0.0426941, -0.0446956, 0.721488)
+bones/29/rotation = Quaternion(-0.689988, -0.036438, -0.0381425, 0.721896)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_q6byc")

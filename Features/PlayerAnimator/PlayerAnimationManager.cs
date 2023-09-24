@@ -4,17 +4,25 @@ namespace Gdsample.Features.PlayerAnimator;
 
 public partial class PlayerAnimationManager : Node3D
 {
+    private AnimationTree _animationTree;
+    
+    public override void _Ready()
+    {
+        _animationTree = GetNode<AnimationTree>("AnimationTree");
+    }
+
     public void SetWalking()
     {
-        var node = GetNode<AnimationTree>("AnimationTree");
-        
-        node.Set("parameters/Transition/transition_request", "Walking");
+        _animationTree.Set("parameters/Transition/transition_request", "Walking");
     }
 
     public void SetIdle()
     {
-        var node = GetNode<AnimationTree>("AnimationTree");
-        
-        node.Set("parameters/Transition/transition_request", "Idle");
+        _animationTree.Set("parameters/Transition/transition_request", "Idle");
+    }
+    
+    public void SetRunning()
+    {
+        _animationTree.Set("parameters/Transition/transition_request", "Running");
     }
 }

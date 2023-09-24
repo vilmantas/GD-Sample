@@ -4,20 +4,35 @@ using Gdsample.Features.PlayerAnimator;
 
 public partial class GameManager : Node
 {
-    public override void _Input(InputEvent @event)
+	private PlayerAnimationManager _playerAnimationManager;
+    
+	public override void _Ready()
+	{
+		_playerAnimationManager = GetParent().GetNode<PlayerAnimationManager>("player_test_animations");
+	}
+
+	public override void _Input(InputEvent @event)
     {
         if (@event.AsText() == "W")
         {
-	        var node = GetParent().GetNode<PlayerAnimationManager>("player_test_animations");
-            
         	if (@event.IsPressed())
         	{
-        		node.SetWalking();				
+		        _playerAnimationManager.SetWalking();				
         	}
         	else
         	{
-        		node.SetIdle();
+		        _playerAnimationManager.SetIdle();
         	}
+        }
+
+        if (Input.IsActionJustPressed("run"))
+        {
+	        _playerAnimationManager.SetRunning();
+        }
+
+        if (Input.IsActionJustReleased("run"))
+        {
+	        _playerAnimationManager.SetWalking();
         }
     }
 }
