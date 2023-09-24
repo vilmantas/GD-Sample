@@ -27,8 +27,10 @@ mesh = SubResource("BoxMesh_wj2dh")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.828881, 0.559424, 0, -0.559424, 0.828881, 0, 32.9631, 34.444)
 
-[node name="Hurdle" parent="." instance=ExtResource("2_1hdar")]
+[node name="Hurdles" type="Node3D" parent="."]
+
+[node name="Hurdle" parent="Hurdles" instance=ExtResource("2_1hdar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30622, 0.965118, 0)
 
-[node name="Hurdle" parent="Hurdle" instance=ExtResource("2_1hdar")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.51606, 1.6612, 0)
+[node name="Hurdle2" parent="Hurdles" instance=ExtResource("2_1hdar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8223, 2.62632, 0)
