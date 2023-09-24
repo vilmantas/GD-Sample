@@ -5,6 +5,6 @@
 [node name="Level" type="Node3D"]
 script = ExtResource("1_id6cg")
 
-[node name="Hurdles" type="Node3D" parent="."]
+[node name="HurdleContainer" type="Node3D" parent="."]
 
-[node name="Ground" type="Node3D" parent="."]
+[node name="GroundContainer" type="Node3D" parent="."]

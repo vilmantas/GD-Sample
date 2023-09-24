@@ -19,6 +19,7 @@ public partial class Hurdle : Area3D
 		if (player != null)
 		{
 			player.DamagePlayer(this._hurdleDamage);
+			QueueFree();
 		}
 	}
 	

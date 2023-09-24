@@ -5,10 +5,12 @@ using Gdsample.Features.PlayerAnimator;
 public partial class Player : CharacterBody3D
 {
 	// Variables
-	private const float Speed = 5.0f;
+	private float speed = 5.0f;
 	private const float JumpVelocity = 5f;
+	private const float SpeedIncrease = 0.5f;
 	private int _maxHealth = 3;
 	private int _health = 3;
+
 	public int Health => _health;
 	public int MaxHeath => _maxHealth;
 
@@ -42,6 +44,7 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		speed += SpeedIncrease * (float)delta;
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
@@ -70,7 +73,6 @@ public partial class Player : CharacterBody3D
 		// Handle Movement
 		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, 0)).Normalized();
-		GD.Print(direction);
 
 		if (direction.X == -1)
 		{
@@ -84,14 +86,14 @@ public partial class Player : CharacterBody3D
 		// Movement
 		if (direction != Vector3.Zero)
 		{
-			velocity.X = direction.X * Speed;
+			velocity.X = direction.X * speed;
 			this._animationManager.SetRunning();
 		}
 		else
 		{
 			this._animationManager.SetIdle();
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, speed);
 		}
 		
 		
