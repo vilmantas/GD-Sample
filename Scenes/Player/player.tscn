@@ -1,10 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://cd6ex76r6rxap"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.cs" id="1_rl3qc"]
+[ext_resource type="PackedScene" uid="uid://vq5xneoklox3" path="res://Models/player_test_animations.tscn" id="2_wyksq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmxbh"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nbtba"]
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 6
@@ -17,6 +16,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.59408)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.993761, 0)
 shape = SubResource("CapsuleShape3D_gmxbh")
 
-[node name="PlayerMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.996777, 0)
-mesh = SubResource("CapsuleMesh_nbtba")
+[node name="PlayerAnimationManager" parent="." instance=ExtResource("2_wyksq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

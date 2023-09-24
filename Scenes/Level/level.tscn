@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b23821cqp8tra"]
+
+[ext_resource type="Script" path="res://Scenes/Level/Level.cs" id="1_id6cg"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_id6cg")
+
+[node name="Hurdles" type="Node3D" parent="."]
+
+[node name="Ground" type="Node3D" parent="."]

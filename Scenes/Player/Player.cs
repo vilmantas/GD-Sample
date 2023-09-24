@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Gdsample.Features.PlayerAnimator;
 
 public partial class Player : CharacterBody3D
 {
@@ -16,6 +17,7 @@ public partial class Player : CharacterBody3D
 	// Nodes
 	private CollisionShape3D _playerCollider;
 	private MeshInstance3D _playerMesh;
+	private PlayerAnimationManager _animationManager;
 	
 	// Signals
 	
@@ -34,6 +36,7 @@ public partial class Player : CharacterBody3D
 	{
 		this._playerCollider = GetNode<CollisionShape3D>("PlayerCollider");
 		this._playerMesh = GetNode<MeshInstance3D>("PlayerMesh");
+		this._animationManager = GetNode<PlayerAnimationManager>("PlayerAnimationManager");
 		base._Ready();
 	}
 
@@ -67,15 +70,31 @@ public partial class Player : CharacterBody3D
 		// Handle Movement
 		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, 0)).Normalized();
+		GD.Print(direction);
+
+		if (direction.X == -1)
+		{
+			_animationManager.Rotation =new Vector3(0f, 90, 0f);
+		}
+		else if (direction.X == 1)
+		{
+			_animationManager.Rotation = new Vector3(0f, -90, 0f);
+		}
+		
+		// Movement
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;
+			this._animationManager.SetRunning();
 		}
 		else
 		{
+			this._animationManager.SetIdle();
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
+		
+		
 
 		Velocity = velocity;
 		MoveAndSlide();
