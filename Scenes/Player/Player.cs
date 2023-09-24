@@ -3,11 +3,20 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
+	// Variables
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
+	private int _maxHealth = 3;
+	private int _health = 3;
 	
+	// Nodes
 	private CollisionShape3D _playerCollider;
 	private MeshInstance3D _playerMesh;
+	
+	// Signals
+	
+	[Signal]
+	public delegate void PlayerDiedEventHandler();
 	
 	
 
@@ -65,5 +74,34 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public void DamagePlayer(int damageAmount)
+	{
+		int newHealth = this._health - damageAmount;
+
+		if (newHealth <= 0)
+		{
+			this._health = 0;
+			EmitSignal(SignalName.PlayerDied);
+		}
+		else
+		{
+			this._health = newHealth;
+		}
+	}
+	
+	public void HealPlayer(int healAmount)
+	{
+		int newHealth = this._health + healAmount;
+
+		if (newHealth >= this._maxHealth)
+		{
+			this._health = _maxHealth;
+		}
+		else
+		{
+			this._health = newHealth;
+		}
 	}
 }
