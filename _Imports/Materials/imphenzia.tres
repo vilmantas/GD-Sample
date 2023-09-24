@@ -1,10 +1,11 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dsnfuli8ad8xi"]
 
-[ext_resource type="Texture2D" uid="uid://bgd1d51ur4b5c" path="res://_Imports/player_test_animations-f66d22942f828016f540bf0900033072_palette_v2.png" id="1_mecqq"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6xre2"]
+load_path = "res://.godot/imported/player_test_animations-f66d22942f828016f540bf0900033072_palette_v2.png-9afcb49e4fbbf6d87358cb937479ef39.s3tc.ctex"
 
 [resource]
 resource_name = "imphenzia"
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_mecqq")
+albedo_texture = SubResource("CompressedTexture2D_6xre2")
 metallic_specular = 0.0
-roughness = 0.140028
+roughness = 0.0

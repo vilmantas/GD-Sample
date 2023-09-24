@@ -25,4 +25,9 @@ public partial class PlayerAnimationManager : Node3D
     {
         _animationTree.Set("parameters/Transition/transition_request", "Running");
     }
+    
+    public void SetCrouching()
+    {
+        _animationTree.Set("parameters/Transition/transition_request", "Crouching");
+    }
 }

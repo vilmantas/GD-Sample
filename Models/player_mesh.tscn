@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://tpa4p5dy45n0"]
+
+[ext_resource type="PackedScene" uid="uid://bqs4ql2x6w5s3" path="res://_Imports/player_mesh.fbx" id="1_kx1j3"]
+[ext_resource type="Script" path="res://Features/PlayerAnimator/PlayerAnimationManager.cs" id="2_1uqcj"]
+[ext_resource type="AnimationLibrary" uid="uid://bqxjij3i0b2ll" path="res://Models/PlayerAnimations.res" id="2_6d28r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_andif"]
+animation = &"PlayerAnimations/Player_Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ogj1"]
+animation = &"PlayerAnimations/Player_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k80if"]
+animation = &"PlayerAnimations/Player_Run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_bp7kn"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "Walking"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "Running"
+input_2/auto_advance = false
+input_2/reset = true
+input_3/name = "Crouching"
+input_3/auto_advance = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wxwok"]
+animation = &"PlayerAnimations/Player_Walk"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2cros"]
+graph_offset = Vector2(-391.195, -76.2652)
+nodes/Crouching/node = SubResource("AnimationNodeAnimation_andif")
+nodes/Crouching/position = Vector2(260, -60)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_0ogj1")
+nodes/Idle/position = Vector2(-340, 20)
+nodes/Running/node = SubResource("AnimationNodeAnimation_k80if")
+nodes/Running/position = Vector2(480, 200)
+nodes/Transition/node = SubResource("AnimationNodeTransition_bp7kn")
+nodes/Transition/position = Vector2(240, 60)
+nodes/Walking/node = SubResource("AnimationNodeAnimation_wxwok")
+nodes/Walking/position = Vector2(140, 380)
+nodes/output/position = Vector2(400, 100)
+node_connections = [&"Transition", 0, &"Idle", &"Transition", 1, &"Walking", &"Transition", 2, &"Running", &"Transition", 3, &"Crouching"]
+
+[node name="player_mesh" instance=ExtResource("1_kx1j3")]
+script = ExtResource("2_1uqcj")
+
+[node name="Skeleton3D" parent="RootNode/armature_humanoid_v5" index="0"]
+bones/1/position = Vector3(1.68754e-16, -0.000413012, -1.87829e-05)
+bones/2/rotation = Quaternion(0.0334879, 0.0154047, 0.000184074, 0.99932)
+bones/4/rotation = Quaternion(0.0251986, -0.0169962, -0.000979158, 0.999538)
+bones/6/rotation = Quaternion(0.00238243, -0.0046726, -0.823424, 0.567402)
+bones/7/rotation = Quaternion(-0.057004, 0.141429, -0.371863, 0.915678)
+bones/8/rotation = Quaternion(0.483024, -0.0611881, -0.233339, 0.841723)
+bones/11/rotation = Quaternion(-0.014417, -0.00688522, 0.823222, 0.567495)
+bones/12/rotation = Quaternion(-0.0272857, -0.0841072, 0.354879, 0.930721)
+bones/13/rotation = Quaternion(0.346627, 0.0378948, 0.245953, 0.90439)
+bones/17/position = Vector3(0.00100544, 8.45505e-05, -1.45996e-10)
+bones/17/rotation = Quaternion(5.65556e-08, 0.254521, 0.967067, 3.03151e-08)
+bones/18/rotation = Quaternion(-0.769429, 2.21345e-08, 2.00848e-08, 0.638731)
+bones/19/rotation = Quaternion(0.623395, 3.06289e-07, 4.85018e-07, 0.781907)
+bones/21/position = Vector3(-0.00100544, 7.81079e-05, 1.57638e-10)
+bones/21/rotation = Quaternion(9.29116e-08, -0.178349, 0.983967, -2.7583e-08)
+bones/22/rotation = Quaternion(-0.0023388, 2.96016e-08, -4.13296e-09, 0.999997)
+bones/23/rotation = Quaternion(0.604201, 3.35773e-07, 4.85006e-07, 0.796832)
+bones/26/position = Vector3(0.00100544, -0.00381733, 0.0127051)
+bones/27/position = Vector3(0.00100544, -0.00374491, -0.000974761)
+bones/27/rotation = Quaternion(-0.0887494, 7.33025e-08, 6.44398e-09, 0.996054)
+bones/28/position = Vector3(-0.00100544, -0.00381733, 0.0125594)
+bones/29/position = Vector3(-0.00100544, -0.00659902, -0.00262391)
+bones/29/rotation = Quaternion(-0.482477, 6.44958e-08, 3.54269e-08, 0.875909)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"PlayerAnimations": ExtResource("2_6d28r")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_2cros")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Transition/current_state = ""
+parameters/Transition/transition_request = "Running"
+parameters/Transition/current_index = -1
