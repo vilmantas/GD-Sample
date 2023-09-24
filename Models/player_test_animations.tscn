@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp43oil1dv6tg"]
+
+[ext_resource type="PackedScene" uid="uid://cbki1f4nccpbg" path="res://_Imports/player_test_animations.fbx" id="1_xxg77"]
+[ext_resource type="Script" path="res://Features/PlayerAnimator/PlayerAnimator.cs" id="2_lrpip"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mdq0w"]
+animation = &"Player_Idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ddxmu"]
+xfade_time = 0.5
+input_0/name = "Walking"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "Idle"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i84v0"]
+animation = &"Player_Walk"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q6byc"]
+graph_offset = Vector2(-728.543, 46.2072)
+nodes/IdelAnim/node = SubResource("AnimationNodeAnimation_mdq0w")
+nodes/IdelAnim/position = Vector2(-100, 220)
+nodes/Transition/node = SubResource("AnimationNodeTransition_ddxmu")
+nodes/Transition/position = Vector2(260, 100)
+nodes/WalkAnim/node = SubResource("AnimationNodeAnimation_i84v0")
+nodes/WalkAnim/position = Vector2(-100, 80)
+nodes/output/position = Vector2(520, 200)
+node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"WalkAnim", &"Transition", 1, &"IdelAnim"]
+
+[node name="player_test_animations" instance=ExtResource("1_xxg77")]
+
+[node name="Skeleton3D" parent="RootNode/armature_humanoid_v5" index="0"]
+bones/1/position = Vector3(1.68754e-16, -0.000220218, -1.0015e-05)
+bones/1/rotation = Quaternion(-7.24642e-09, -0.0137874, -0.000627019, 0.999905)
+bones/2/rotation = Quaternion(0.0417115, 4.10304e-06, -0.000343668, 0.99913)
+bones/4/rotation = Quaternion(0.0393645, 0.000474665, -0.000545953, 0.999225)
+bones/6/rotation = Quaternion(0.00928343, -0.022286, -0.840248, 0.541664)
+bones/7/rotation = Quaternion(0.00935503, 0.0142633, -0.410864, 0.911537)
+bones/8/rotation = Quaternion(0.12161, -0.00870396, -0.198733, 0.97244)
+bones/11/rotation = Quaternion(-0.0434959, -0.0402224, 0.841943, 0.536304)
+bones/12/rotation = Quaternion(0.00351012, -0.0206987, 0.419925, 0.907316)
+bones/13/rotation = Quaternion(0.153097, 0.0130407, 0.190515, 0.969585)
+bones/17/position = Vector3(0.00100544, 7.80113e-05, 3.54812e-06)
+bones/17/rotation = Quaternion(0.12614, 0.0816504, 0.988321, -0.0253618)
+bones/18/rotation = Quaternion(-0.256882, 2.96783e-08, 3.54045e-09, 0.966443)
+bones/19/rotation = Quaternion(0.785308, 0.0153449, -0.0130332, 0.618777)
+bones/21/position = Vector3(-0.00100544, 7.20669e-05, 3.27801e-06)
+bones/21/rotation = Quaternion(-0.0912695, 0.0976008, 0.990796, 0.0216152)
+bones/22/rotation = Quaternion(-0.260828, 2.96636e-08, 3.66165e-09, 0.965385)
+bones/23/rotation = Quaternion(0.777458, -0.036602, 0.0302441, 0.62714)
+bones/26/position = Vector3(0.00145694, -0.00381733, 0.00216085)
+bones/27/rotation = Quaternion(-0.688033, 0.0656028, 0.0687115, 0.719434)
+bones/28/position = Vector3(-0.00145583, -0.00381733, 0.00216085)
+bones/29/rotation = Quaternion(-0.689729, -0.0415013, -0.043446, 0.721571)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_q6byc")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 1
+script = ExtResource("2_lrpip")
