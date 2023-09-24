@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhbqrykfb88md"]
+
+[ext_resource type="Script" path="res://Scenes/Hurdle/Hurdle.cs" id="1_a1hgb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5jqb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tnsdb"]
+
+[node name="Hurdle" type="Area3D"]
+collision_layer = 4
+script = ExtResource("1_a1hgb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_b5jqb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_tnsdb")

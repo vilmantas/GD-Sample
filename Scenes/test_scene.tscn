@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0elu4wcdgtrg"]
+[gd_scene load_steps=5 format=3 uid="uid://b0elu4wcdgtrg"]
 
 [ext_resource type="PackedScene" uid="uid://cd6ex76r6rxap" path="res://Scenes/Player/player.tscn" id="1_oky04"]
+[ext_resource type="PackedScene" uid="uid://dhbqrykfb88md" path="res://Scenes/Hurdle/hurdle.tscn" id="2_1hdar"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2atr"]
 size = Vector3(1, 1, 24.5899)
@@ -14,6 +15,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9689, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(45.374, 0, 0, 0, 1, 0, 0, 0, 0.124847, 0, 0, 0)
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_h2atr")
@@ -24,3 +26,9 @@ mesh = SubResource("BoxMesh_wj2dh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.828881, 0.559424, 0, -0.559424, 0.828881, 0, 32.9631, 34.444)
+
+[node name="Hurdle" parent="." instance=ExtResource("2_1hdar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30622, 0.965118, 0)
+
+[node name="Hurdle" parent="Hurdle" instance=ExtResource("2_1hdar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.51606, 1.6612, 0)

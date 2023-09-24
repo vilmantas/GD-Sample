@@ -5,7 +5,7 @@ public partial class Player : CharacterBody3D
 {
 	// Variables
 	public const float Speed = 5.0f;
-	public const float JumpVelocity = 4.5f;
+	public const float JumpVelocity = 5f;
 	private int _maxHealth = 3;
 	private int _health = 3;
 	
@@ -27,6 +27,7 @@ public partial class Player : CharacterBody3D
 	{
 		this._playerCollider = GetNode<CollisionShape3D>("PlayerCollider");
 		this._playerMesh = GetNode<MeshInstance3D>("PlayerMesh");
+		this.PrintHealth();
 		base._Ready();
 	}
 
@@ -89,6 +90,7 @@ public partial class Player : CharacterBody3D
 		{
 			this._health = newHealth;
 		}
+		this.PrintHealth();
 	}
 	
 	public void HealPlayer(int healAmount)
@@ -103,5 +105,11 @@ public partial class Player : CharacterBody3D
 		{
 			this._health = newHealth;
 		}
+		this.PrintHealth();
+	}
+
+	private void PrintHealth()
+	{
+		GD.Print("Remaining health: " + this._health);
 	}
 }
