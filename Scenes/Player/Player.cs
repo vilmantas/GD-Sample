@@ -8,6 +8,7 @@ public partial class Player : CharacterBody3D
 	public const float JumpVelocity = 5f;
 	private int _maxHealth = 3;
 	private int _health = 3;
+	private bool crouching = false;
 	
 	// Nodes
 	private CollisionShape3D _playerCollider;
@@ -39,24 +40,26 @@ public partial class Player : CharacterBody3D
 		if (!IsOnFloor())
 			velocity.Y -= _gravity * (float)delta;
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
-			velocity.Y = JumpVelocity;
-		
 		// Handle Crouch.
 		if (Input.IsActionJustPressed("crouch"))
 		{
+			this.crouching = true;
 			Vector3 crouchingScale = new Vector3(1f, 0.5f, 1f);
-			this._playerMesh.Scale = crouchingScale;
-			this._playerCollider.Scale = crouchingScale;
+			this.Scale = crouchingScale;
 		}
 
 		if (Input.IsActionJustReleased("crouch"))
 		{
+			this.crouching = false;
 			Vector3 nonCrouchingScale = new Vector3(1f, 1f, 1f);
-			this._playerMesh.Scale = nonCrouchingScale;
-			this._playerCollider.Scale = nonCrouchingScale;
+			this.Scale = nonCrouchingScale;
 		}
+		
+		// Handle Jump.
+		if (!crouching && Input.IsActionJustPressed("jump") && IsOnFloor())
+			velocity.Y = JumpVelocity;
+		
+
 		
 
 		// Get the input direction and handle the movement/deceleration.

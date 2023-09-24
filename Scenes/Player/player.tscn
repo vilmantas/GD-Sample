@@ -14,7 +14,9 @@ script = ExtResource("1_rl3qc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.59408)
 
 [node name="PlayerCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.993761, 0)
 shape = SubResource("CapsuleShape3D_gmxbh")
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.996777, 0)
 mesh = SubResource("CapsuleMesh_nbtba")

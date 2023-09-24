@@ -20,7 +20,6 @@ public partial class Hurdle : Area3D
 		{
 			player.DamagePlayer(this._hurdleDamage);
 		}
-		QueueFree();
 	}
 	
 }
